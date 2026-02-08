@@ -22,12 +22,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _sensitivity = 5f;
     [SerializeField] private float _maxAngle = 60f;
     [SerializeField] private Camera _camera;
+    [SerializeField] private GameObject _inputController;
 
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        _playerInput = GetComponent<PlayerInput>();
+        // _playerInput = GetComponent<PlayerInput>();
+        _playerInput = _inputController.GetComponent<PlayerInput>();
         _groundChecker = GetComponent<GroundChecker>();
         
         _moveAction = _playerInput.actions["Moved"];
@@ -118,6 +120,6 @@ public class PlayerController : MonoBehaviour
         _camera.transform.Rotate(Vector3.up * (_lookInput.x * _sensitivity * Time.fixedDeltaTime));
         
         // Двигаем камеру вслед за игроком на высоте 2
-        _camera.transform.position = moveGlobal + new Vector3(0,2,0);
+        _camera.transform.position = moveGlobal + new Vector3(0,1,0);
     }
 }
