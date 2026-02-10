@@ -10,13 +10,12 @@ public class BuildingController : MonoBehaviour
     [SerializeField] private GameObject _buildingPrefab;
     [SerializeField] private Camera _camera;
     [SerializeField] private GameObject _spawnBuilding;
-    [SerializeField] private Material _buildingMaterial;
-
     [SerializeField] private LayerMask _groundLayer;
 
     private bool _isBuilding;
     private GameObject _obj;
     private Material _prefabMaterial;
+    private BuildingComponent _buildingComponent;
     
     private PlayerInput _playerInput;
     private InputAction _rotateBuildAction;
@@ -53,15 +52,19 @@ public class BuildingController : MonoBehaviour
 
     private void OnRotateBuildPerformed(InputAction.CallbackContext obj)
     {
-        // Вращение объекта вокруг своей оси
-        _obj.transform.rotation = Quaternion.Euler(0, _obj.transform.eulerAngles.y + _rotate, 0);
+        if (_obj)
+        {
+            // Вращение объекта вокруг своей оси
+            _obj.transform.rotation = Quaternion.Euler(0, _obj.transform.eulerAngles.y + _rotate, 0);
+        }
     }
 
     private void OnButtonLeftdPerformed(InputAction.CallbackContext obj)
     {
-        if (_obj)
+        if (_obj && _buildingComponent.GetBuildingEnable())
         {
-            _obj.GetComponent<Renderer>().material = _prefabMaterial;
+            // При выставлении объекта обновим ему материал
+            _buildingComponent.UpdateMaterialBuilding();
             _obj = null;
         }
     }
@@ -70,7 +73,10 @@ public class BuildingController : MonoBehaviour
     {
         if (Input.GetKeyDown("e"))
         {
-            CreateBuilding();
+            if (!_obj)
+            {
+                CreateBuilding();
+            }
         }
 
         if (_obj)
@@ -99,11 +105,12 @@ public class BuildingController : MonoBehaviour
                 hit.point,  
                 Quaternion.Euler(_buildingPrefab.transform.eulerAngles));
                 
+             // При создании объекта получим из него BuildingComponent
+             // для управления материалом объекта.
+            _buildingComponent = _obj.GetComponent<BuildingComponent>();
+            
             // Устанавливаем родителя для текущего объекта
             _obj.transform.SetParent(_inputController.transform);
-                
-            _prefabMaterial = _obj.GetComponent<Renderer>().material;
-            _obj.GetComponent<Renderer>().material = _buildingMaterial;
         }
     }
 }
