@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc7922fa046e4c1092d27f6158daf914, type: 3}
+  m_Name: Meat
+  m_EditorClassIdentifier: 
+  itemName: Meat
+  uiDisplay: {fileID: 1527575307, guid: cfe4d075a93c4cf42be802ec4d62b09d, type: 3}
+  groupType: 0
+  buildingPrefab: {fileID: 8136295697789634443, guid: 386272c2cd2daf040ade792158663725, type: 3}
+  itemCraft:
+  - {fileID: 11400000, guid: 0ac719b0bc9d5ff4aa4ef11ac1c7e57c, type: 2}
+  - {fileID: 11400000, guid: cd4f8aecb9c455b449f41ce01d237fbc, type: 2}
+  data:
+    Id: 1
+    itemName: 
+    uiDisplay: {fileID: 0}
+    groupType: 0
+    buildingPrefab: {fileID: 0}
+    itemCraft: []
