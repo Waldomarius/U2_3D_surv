@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using containers;
 using craft.MainMenu;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -29,12 +30,12 @@ namespace craft.LeftMenu
         {
             slotsInLeftMenu = new Dictionary<GameObject, CraftGroupSlot>();
 
-            for (int i = 0; i < craftGroup.container.craftGroupSlots.Count; i++)
+            for (int i = 0; i < craftGroup.GetContainer().craftGroupSlots.Count; i++)
             {
                 GameObject obj = Instantiate(_craftGroupPrefab, Vector3.zero, Quaternion.identity, transform);
                 obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
 
-                CraftGroupSlot slot = craftGroup.container.craftGroupSlots[i];
+                CraftGroupSlot slot = craftGroup.GetContainer().craftGroupSlots[i];
                 
                 Image img = obj.GetComponentInChildren<Image>();
                 img.sprite = slot.item.uiDisplay;

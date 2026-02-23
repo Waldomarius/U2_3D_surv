@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Storage
   uiDisplay: {fileID: 968536430, guid: cfe4d075a93c4cf42be802ec4d62b09d, type: 3}
-  groupType: 1
+  groupType: 2
   data:
-    Id: 1
+    id: -1
     itemName: 
     uiDisplay: {fileID: 0}
     groupType: 0

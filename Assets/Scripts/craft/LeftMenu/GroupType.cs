@@ -2,6 +2,7 @@
 {
     public enum GroupType
     {
+        NoCraft,
         Food,
         Storage,
         Tools

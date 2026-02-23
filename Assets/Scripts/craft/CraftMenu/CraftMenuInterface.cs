@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using containers;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -7,14 +8,17 @@ namespace craft.CraftMenu
 {
     public abstract class CraftMenuInterface : MonoBehaviour
     {
-        public CraftObject craft;
-        public Dictionary<GameObject, CraftSlot> slotsInCraftMenu;
+        [SerializeField] public GameObject container;
+        
+        protected ItemContainer item;
+        public Dictionary<GameObject, ItemSlot> itemSlotsObject;
         
         public abstract void CreateSlots();
 
         private void Start()
         {
-            craft.InitCraft();
+            item = container.GetComponent<ItemContainer>();
+            item.InitItemContainer();
             CreateSlots();
         }
         

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using containers;
 using craft.CraftMenu;
-using craft.LeftMenu;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -28,11 +28,11 @@ namespace craft.MainMenu
         public override void CreateSlots()
         {
             gameObject.SetActive(false);
-            slotsInMainMenu = new Dictionary<GameObject, CraftElementSlot>();
+            itemSlotsObject = new Dictionary<GameObject, ItemSlot>();
             
-            for (int i = 0; i < craftElement.container.craftElementSlots.Count; i++)
+            for (int i = 0; i < item.GetContainer().craftElementSlots.Count; i++)
             {
-                CraftElementSlot slot = craftElement.container.craftElementSlots[i];
+                ItemSlot slot = item.GetContainer().craftElementSlots[i];
 
                 GameObject obj = Instantiate(_craftElementPrefab, Vector3.zero, Quaternion.identity, transform);
                 obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
@@ -47,13 +47,13 @@ namespace craft.MainMenu
                 AddEvent(obj, EventTriggerType.PointerClick, delegate { OnPointerClick(obj);});
                 
                 obj.SetActive(false);
-                slotsInMainMenu.Add(obj, slot);
+                itemSlotsObject.Add(obj, slot);
             }
         }
         
         private void OnPointerClick(GameObject obj)
         {
-            CraftElementSlot slot = slotsInMainMenu.GetValueOrDefault(obj, null);
+            ItemSlot slot = itemSlotsObject.GetValueOrDefault(obj, null);
 
             // Покажем меню согласно groupType объектов
             _dynamicCraftMenuUI.VisibleCraft(slot);
@@ -75,7 +75,7 @@ namespace craft.MainMenu
             text.text = slot.item.itemName;
 
             // Очистим старое меню
-            foreach (KeyValuePair<GameObject, CraftElementSlot> pair in slotsInMainMenu)
+            foreach (KeyValuePair<GameObject, ItemSlot> pair in itemSlotsObject)
             {
                 pair.Key.SetActive(false);
             }
@@ -83,9 +83,9 @@ namespace craft.MainMenu
             int count = 0;
 
             // Засетаем новое меню
-            foreach (KeyValuePair<GameObject, CraftElementSlot> pair in slotsInMainMenu)
+            foreach (KeyValuePair<GameObject, ItemSlot> pair in itemSlotsObject)
             {
-                CraftElementSlot temp = pair.Value;
+                ItemSlot temp = pair.Value;
                 if (temp.item.groupType == slot.item.groupType)
                 {
                     pair.Key.GetComponent<RectTransform>().localPosition = GetPosition(count);

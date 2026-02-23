@@ -13,5 +13,10 @@ MonoBehaviour:
   m_Name: Food
   m_EditorClassIdentifier: 
   itemName: Food
-  description: 
   uiDisplay: {fileID: 514417343, guid: cfe4d075a93c4cf42be802ec4d62b09d, type: 3}
+  groupType: 1
+  data:
+    id: 0
+    itemName: 
+    uiDisplay: {fileID: 0}
+    groupType: 0

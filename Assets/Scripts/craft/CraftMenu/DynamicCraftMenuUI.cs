@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using building;
-using craft.MainMenu;
+using containers;
 using eventSystem;
-using Items;
+using Items.scritableObjects.items;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -37,29 +37,32 @@ namespace craft.CraftMenu
         public override void CreateSlots()
         {
             gameObject.SetActive(false);
-            
+            //
             // Объект кнопки создания крафта
             GameObject createButton = Instantiate(_createButtonPrefab, Vector3.zero, Quaternion.identity, transform);
             createButton.GetComponent<RectTransform>().localPosition = new Vector3(X_CREATE_BUTTON, Y_CREATE_BUTTON, 0);
             // На кнопу вешаем свой конкретный слушатель и свой конкретный триггер
             AddEvent(createButton, EventTriggerType.PointerClick, delegate { OnPointerClick(_buildingPrefab);});
             
-            slotsInCraftMenu = new Dictionary<GameObject, CraftSlot>();
-
-            for (int i = 0; i < craft.container.craftSlots.Count; i++)
+            itemSlotsObject = new Dictionary<GameObject, ItemSlot>();
+            
+            for (int i = 0; i < item.GetContainer().craftElementSlots.Count; i++)
             {
+                ItemSlot slot = item.GetContainer().craftElementSlots[i];
+
                 GameObject obj = Instantiate(_craftPrefab, Vector3.zero, Quaternion.identity, transform);
                 obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
 
-                CraftSlot slot = craft.container.craftSlots[i];
-                
                 Image img = obj.GetComponentInChildren<Image>();
                 img.sprite = slot.item.uiDisplay;
-                
+
                 TextMeshProUGUI text = obj.GetComponentInChildren<TextMeshProUGUI>();
                 text.text = slot.item.itemName;
                 
-                slotsInCraftMenu.Add(obj, slot);
+
+                
+                obj.SetActive(false);
+                itemSlotsObject.Add(obj, slot);
             }
         }
         
@@ -71,7 +74,7 @@ namespace craft.CraftMenu
             GameEvents.CloseUI(true);
         }
         
-        public void VisibleCraft(CraftElementSlot slot)
+        public void VisibleCraft(ItemSlot slot)
         {
             _buildingPrefab = null;
             // Показываем фон меню 
@@ -80,31 +83,36 @@ namespace craft.CraftMenu
             // Устанавливаем иконку и текст меню
             Image img = gameObject.transform.GetChild(0).GetComponentInChildren<Image>();
             img.sprite = slot.item.uiDisplay;
-
+            
             TextMeshProUGUI text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
             text.text = slot.item.itemName;
             
+            
+            
             // Очистим старое меню
-            foreach (KeyValuePair<GameObject, CraftSlot> pair in slotsInCraftMenu)
+            foreach (KeyValuePair<GameObject, ItemSlot> pair in itemSlotsObject)
             {
                 pair.Key.SetActive(false);
             }
-
+            
             _buildingPrefab = slot.item.buildingPrefab;
             
             int count = 0;
 
             // Засетаем новое меню
-            ItemCraftObject[] itemCraft = slot.item.itemCraft;
-            foreach (ItemCraftObject item in itemCraft)
+            CraftElements[] itemCraft = slot.item.craftElements;
+            foreach (CraftElements element in itemCraft)
             {
-                foreach (KeyValuePair<GameObject, CraftSlot> pair in slotsInCraftMenu)
+                foreach (KeyValuePair<GameObject, ItemSlot> pair in itemSlotsObject)
                 {
-                    CraftSlot temp = pair.Value;
-                    if (item.itemName == temp.item.itemName)
+                    ItemSlot temp = pair.Value;
+                    if (element.item.itemName == temp.item.itemName)
                     {
                         pair.Key.GetComponent<RectTransform>().localPosition = GetPosition(count);
                         pair.Key.SetActive(true);
+
+                        TextMeshProUGUI value = pair.Key.transform.GetChild(2).GetComponentInChildren<TextMeshProUGUI>();
+                        value.text = element.count.ToString();
                         count++;
                         break;
                     }
