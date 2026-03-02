@@ -6,15 +6,15 @@ namespace Items.scritableObjects.dateBase
     [CreateAssetMenu(fileName = "Items DataBase", menuName = "Items/DataBase/Items DataBase")]
     public class ItemsDataBase : ScriptableObject, ISerializationCallbackReceiver
     {
-        public ItemObject[] craftElements;
+        public ItemObject[] items;
         
         public void UpdateID()
         {
-            for (int i = 0; i < craftElements.Length; i++)
+            for (int i = 0; i < items.Length; i++)
             {
-                if (craftElements != null && !craftElements[i].data.id.Equals(i))
+                if (items != null && !items[i].data.id.Equals(i))
                 {
-                    craftElements[i].data.id = i;
+                    items[i].data.id = i;
                 }
             }
         }

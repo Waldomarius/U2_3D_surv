@@ -7,7 +7,7 @@ namespace containers
 {
     public class CraftGroupContainer : MonoBehaviour
     {
-        public CraftGroupDataBase dataBase;
+        [SerializeField] private CraftGroupDataBase dataBase;
         private CraftGroupsContainer _container;
 
         public CraftGroupsContainer GetContainer()

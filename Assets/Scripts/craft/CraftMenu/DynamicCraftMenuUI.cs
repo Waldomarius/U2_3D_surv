@@ -2,6 +2,7 @@
 using building;
 using containers;
 using eventSystem;
+using inventorySystem;
 using Items.scritableObjects.items;
 using TMPro;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace craft.CraftMenu
     {
         [SerializeField] private GameObject _craftPrefab;
         [SerializeField] private GameObject _createButtonPrefab;
+        [SerializeField] private GameObject _createInactiveButtonPrefab;
         [SerializeField] private int X_START;
         [SerializeField] private int Y_START;
         [SerializeField] private int X_SPACE_BEETWEEN_ITEMS;
@@ -22,12 +24,29 @@ namespace craft.CraftMenu
         [SerializeField] private int X_CREATE_BUTTON;
         [SerializeField] private int Y_CREATE_BUTTON;
         [SerializeField] private GameObject _buildingSpawn;
+        [SerializeField] public GameObject _inventoryContainerGO;
+        
+        protected InventoryContainer _inventoryContainer;
         
         private GameObject _buildingPrefab;
         private BuildingController _buildingController;
+        private Dictionary<string, int> _craftElement = new Dictionary<string, int>();
+        private GameObject _createButton;
+        
+        
+        private void OnEnable()
+        {
+            _inventoryContainer.OnInventaryChanged += UpdateButtonUI;
+        }
+
+        private void OnDisable()
+        {
+            _inventoryContainer.OnInventaryChanged -= UpdateButtonUI;
+        }
         
         private void Awake()
         {
+            _inventoryContainer = _inventoryContainerGO.GetComponent<InventoryContainer>();
             _buildingController = _buildingSpawn.GetComponent<BuildingController>();
         }
         
@@ -37,18 +56,12 @@ namespace craft.CraftMenu
         public override void CreateSlots()
         {
             gameObject.SetActive(false);
-            //
-            // Объект кнопки создания крафта
-            GameObject createButton = Instantiate(_createButtonPrefab, Vector3.zero, Quaternion.identity, transform);
-            createButton.GetComponent<RectTransform>().localPosition = new Vector3(X_CREATE_BUTTON, Y_CREATE_BUTTON, 0);
-            // На кнопу вешаем свой конкретный слушатель и свой конкретный триггер
-            AddEvent(createButton, EventTriggerType.PointerClick, delegate { OnPointerClick(_buildingPrefab);});
-            
+
             itemSlotsObject = new Dictionary<GameObject, ItemSlot>();
             
-            for (int i = 0; i < item.GetContainer().craftElementSlots.Count; i++)
+            for (int i = 0; i < item.GetContainer().itemSlots.Count; i++)
             {
-                ItemSlot slot = item.GetContainer().craftElementSlots[i];
+                ItemSlot slot = item.GetContainer().itemSlots[i];
 
                 GameObject obj = Instantiate(_craftPrefab, Vector3.zero, Quaternion.identity, transform);
                 obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
@@ -59,19 +72,96 @@ namespace craft.CraftMenu
                 TextMeshProUGUI text = obj.GetComponentInChildren<TextMeshProUGUI>();
                 text.text = slot.item.itemName;
                 
-
-                
                 obj.SetActive(false);
                 itemSlotsObject.Add(obj, slot);
             }
         }
+
+        private void UpdateButtonUI(bool obj)
+        {
+            CreateButton();
+        }
         
+        private void CreateButton()
+        {
+            Destroy(_createButton);
+            
+            if (IsApplyCraft())
+            {
+                _createButton = Instantiate(_createButtonPrefab, Vector3.zero, Quaternion.identity, transform);
+            }
+            else
+            {
+                _createButton = Instantiate(_createInactiveButtonPrefab, Vector3.zero, Quaternion.identity, transform);
+            }
+            _createButton.GetComponent<RectTransform>().localPosition = new Vector3(X_CREATE_BUTTON, Y_CREATE_BUTTON, 0);
+            // На кнопу вешаем свой конкретный слушатель и свой конкретный триггер
+            AddEvent(_createButton, EventTriggerType.PointerClick, delegate { OnPointerClick(_buildingPrefab);});
+        }
+
         private void OnPointerClick(GameObject obj)
         {
-            // Создадим крафт в мире
-            _buildingController.CreateBuilding(obj);
-            // Оповестим слушателей о закрытии UI
-            GameEvents.CloseUI(true);
+            if (IsApplyCraft())
+            {
+                // Создадим крафт в мире
+                _buildingController.CreateBuilding(obj);
+                // Оповестим слушателей о закрытии UI
+                GameEvents.CloseUI(true);
+                GameEvents.OpenedUI(false);
+                CreateButton();
+                RemoveItemFromStorage();
+                _inventoryContainer.UpdateInventory();
+            }
+        }
+
+        /**
+         * списать ресурсы со склада
+         */
+        private void RemoveItemFromStorage()
+        {
+            Inventory inventory = _inventoryContainer.GetContainer();
+            
+            foreach (KeyValuePair<string, int> pair in _craftElement)
+            {
+                foreach (var slot in inventory.items)
+                {
+                    if (pair.Key == slot.item.itemName)
+                    {
+                        int newStorageAmount = slot.amount -  pair.Value;
+                        slot.amount =  newStorageAmount;
+                        if (slot.amount == 0)
+                        {
+                            slot.RemoveItem();
+                        }
+                    }
+                }
+            }
+        }
+        
+        /**
+         * Надо проверить что на складе есть доступные ресурсы.
+         */
+        private bool IsApplyCraft()
+        {
+            Inventory inventory = _inventoryContainer.GetContainer();
+            bool applyCraft = false;
+            foreach (KeyValuePair<string, int> pair in _craftElement)
+            {
+                foreach (var slot in inventory.items)
+                {
+                    if (pair.Key == slot.item.itemName && pair.Value == slot.amount)
+                    {
+                        applyCraft = true;
+                    }
+                }
+
+                if (!applyCraft)
+                {
+                    return false;
+                }
+            }
+            
+            return true;
         }
         
         public void VisibleCraft(ItemSlot slot)
@@ -87,8 +177,6 @@ namespace craft.CraftMenu
             TextMeshProUGUI text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
             text.text = slot.item.itemName;
             
-            
-            
             // Очистим старое меню
             foreach (KeyValuePair<GameObject, ItemSlot> pair in itemSlotsObject)
             {
@@ -96,6 +184,9 @@ namespace craft.CraftMenu
             }
             
             _buildingPrefab = slot.item.buildingPrefab;
+
+            // Удалим элементы для крафта с предыдущего крафта
+            _craftElement.Clear();
             
             int count = 0;
 
@@ -108,6 +199,9 @@ namespace craft.CraftMenu
                     ItemSlot temp = pair.Value;
                     if (element.item.itemName == temp.item.itemName)
                     {
+                        // Положим элементы для крафта в словарь
+                        _craftElement[element.item.itemName] = element.count;
+                        
                         pair.Key.GetComponent<RectTransform>().localPosition = GetPosition(count);
                         pair.Key.SetActive(true);
 
@@ -118,6 +212,9 @@ namespace craft.CraftMenu
                     }
                 }
             }
+            
+            // Объект кнопки создания крафта
+            CreateButton();
         }
 
         /**

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using eventSystem;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace player
@@ -10,6 +11,7 @@ namespace player
         private Rigidbody _rb;
         private float _rotationX;
         private bool _isGrounded;
+        private bool _isOpenedUI;
         private GroundChecker _groundChecker;
     
         private PlayerInput _playerInput;
@@ -51,6 +53,13 @@ namespace player
             _lookAction.canceled += OnLookCanceled;
         
             _groundChecker.OnGroundStateChange += HandleGroundStateChanged;
+            
+            GameEvents.OnOpenedUI += OpenedUI;
+        }
+
+        private void OpenedUI(bool isOpenedUI)
+        {
+            _isOpenedUI = isOpenedUI;
         }
 
         private void OnDisable()
@@ -66,6 +75,8 @@ namespace player
             _lookAction.canceled -= OnLookCanceled;
         
             _groundChecker.OnGroundStateChange -= HandleGroundStateChanged;
+            
+            GameEvents.OnOpenedUI -= OpenedUI;
         }
 
         private void OnMovePerformed(InputAction.CallbackContext context)
@@ -110,16 +121,23 @@ namespace player
 
             // Поворачиваем игрока в сторону поворота камеры по оси y (влево/вправо)
             transform.rotation = Quaternion.Euler(0, _camera.transform.eulerAngles.y, 0);
-        
-            // Поворачиваем камеру вверх/вниз
-            _rotationX -= _lookInput.y * _sensitivity * Time.fixedDeltaTime;
-            _rotationX = Mathf.Clamp(_rotationX, -_maxAngle, _maxAngle);
-            float rotationY = _camera.transform.localEulerAngles.y;
-            _camera.transform.localEulerAngles = new Vector3(_rotationX, rotationY, 0);
+            
+            if (_isOpenedUI)
+            {
+                _camera.transform.localEulerAngles = new Vector3(15, 0, 0);
+            }
+            else
+            {
+                // Поворачиваем камеру вверх/вниз
+                _rotationX -= _lookInput.y * _sensitivity * Time.fixedDeltaTime;
+                _rotationX = Mathf.Clamp(_rotationX, -_maxAngle, _maxAngle);
+                float rotationY = _camera.transform.localEulerAngles.y;
+                _camera.transform.localEulerAngles = new Vector3(_rotationX, rotationY, 0);
 
-            // Поворачиваем камеру влево/вправо
-            _camera.transform.Rotate(Vector3.up * (_lookInput.x * _sensitivity * Time.fixedDeltaTime));
-        
+                // Поворачиваем камеру влево/вправо
+                _camera.transform.Rotate(Vector3.up * (_lookInput.x * _sensitivity * Time.fixedDeltaTime));
+            }
+
             // Двигаем камеру вслед за игроком на высоте 2
             _camera.transform.position = moveGlobal + new Vector3(0,1,0);
         }

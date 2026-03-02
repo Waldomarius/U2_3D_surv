@@ -8,5 +8,8 @@ namespace eventSystem
         
         public static void CloseUI(bool closeUI) => OnCloseUI?.Invoke(closeUI);
         
+        public static event Action<bool> OnOpenedUI;
+        
+        public static void OpenedUI(bool openedUI) => OnOpenedUI?.Invoke(openedUI);
     }
 }

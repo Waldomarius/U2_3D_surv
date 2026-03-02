@@ -7,33 +7,32 @@ namespace containers
 {
     public class ItemContainer : MonoBehaviour
     {
-        public ItemsDataBase dataBase;
-        
-        private ItemSlotsContainer _container;
+        [SerializeField] private ItemsDataBase dataBase;
+        private ItemCraftSlotsContainer _container;
 
-        public ItemSlotsContainer GetContainer()
+        public ItemCraftSlotsContainer GetContainer()
         {
             return _container;
         } 
         
         public void InitItemContainer()
         {
-            _container = new ItemSlotsContainer();
+            _container = new ItemCraftSlotsContainer();
             // Создадим список на количество крафтовых элементов в БД
-            _container.craftElementSlots =  new List<ItemSlot>(dataBase.craftElements.Length);
+            _container.itemSlots =  new List<ItemSlot>(dataBase.items.Length);
 
-            for (int i = 0; i < dataBase.craftElements.Length; i++)
+            for (int i = 0; i < dataBase.items.Length; i++)
             {
-                Item item = dataBase.craftElements[i].CreateItem();
-                _container.craftElementSlots.Add(new ItemSlot(item));
+                Item item = dataBase.items[i].CreateItem();
+                _container.itemSlots.Add(new ItemSlot(item));
             }
         }
     }
     
     [System.Serializable]
-    public class ItemSlotsContainer
+    public class ItemCraftSlotsContainer
     {
-        public List<ItemSlot> craftElementSlots;
+        public List<ItemSlot> itemSlots;
     }
 
     

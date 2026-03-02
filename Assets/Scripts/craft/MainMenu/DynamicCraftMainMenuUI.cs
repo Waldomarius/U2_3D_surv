@@ -30,9 +30,9 @@ namespace craft.MainMenu
             gameObject.SetActive(false);
             itemSlotsObject = new Dictionary<GameObject, ItemSlot>();
             
-            for (int i = 0; i < item.GetContainer().craftElementSlots.Count; i++)
+            for (int i = 0; i < item.GetContainer().itemSlots.Count; i++)
             {
-                ItemSlot slot = item.GetContainer().craftElementSlots[i];
+                ItemSlot slot = item.GetContainer().itemSlots[i];
 
                 GameObject obj = Instantiate(_craftElementPrefab, Vector3.zero, Quaternion.identity, transform);
                 obj.GetComponent<RectTransform>().localPosition = GetPosition(i);

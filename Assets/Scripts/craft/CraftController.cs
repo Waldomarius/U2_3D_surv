@@ -49,6 +49,7 @@ namespace craft
         {
             bool status = _canvas.enabled;
             _canvas.enabled = !status;
+            GameEvents.OpenedUI(!status);
         }
     }
 }

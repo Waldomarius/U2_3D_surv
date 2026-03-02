@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc6d345157848b8952d716bb8988e28, type: 3}
   m_Name: ItemDataBase
   m_EditorClassIdentifier: 
-  craftElements:
+  items:
   - {fileID: 11400000, guid: d60c1096fe0b91f488544662b49870d3, type: 2}
   - {fileID: 11400000, guid: 14a62307b1d476b42bebc5ab962d64b3, type: 2}
   - {fileID: 11400000, guid: 42d05fdab7485d7478b5559e354c13ae, type: 2}
