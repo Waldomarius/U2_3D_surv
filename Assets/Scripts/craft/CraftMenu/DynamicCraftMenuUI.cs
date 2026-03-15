@@ -127,7 +127,7 @@ namespace craft.CraftMenu
                 {
                     if (pair.Key == slot.item.itemName)
                     {
-                        int newStorageAmount = slot.amount -  pair.Value;
+                        int newStorageAmount = slot.amount - pair.Value;
                         slot.amount =  newStorageAmount;
                         if (slot.amount == 0)
                         {
@@ -144,18 +144,27 @@ namespace craft.CraftMenu
         private bool IsApplyCraft()
         {
             Inventory inventory = _inventoryContainer.GetContainer();
-            bool applyCraft = false;
+            
+            // Элементы для крафта
             foreach (KeyValuePair<string, int> pair in _craftElement)
             {
-                foreach (var slot in inventory.items)
+                // Проверяем наличие в инвентаре
+                string itemForCraft = null;
+                foreach (var itemInInventory in inventory.items)
                 {
-                    if (pair.Key == slot.item.itemName && pair.Value == slot.amount)
+                    if (pair.Key == itemInInventory.item.itemName)
                     {
-                        applyCraft = true;
+                        itemForCraft = itemInInventory.item.itemName;
+                        
+                        if (pair.Value > itemInInventory.amount)
+                        {
+                            return false;
+                        }
                     }
                 }
 
-                if (!applyCraft)
+                // Если мы не нашли айтем в инвентаре, значит элемента для крафта нет
+                if (itemForCraft == null)
                 {
                     return false;
                 }

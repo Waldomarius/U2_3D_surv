@@ -1,4 +1,5 @@
-﻿using eventSystem;
+﻿using System;
+using eventSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -112,6 +113,7 @@ namespace player
             _isGrounded = grounded;
         }
 
+        private float _rotationInOpenUI = Single.NaN;
         private void FixedUpdate()
         {
             // Направляем движение игрока в сторону поворота камеры
@@ -121,10 +123,15 @@ namespace player
 
             // Поворачиваем игрока в сторону поворота камеры по оси y (влево/вправо)
             transform.rotation = Quaternion.Euler(0, _camera.transform.eulerAngles.y, 0);
-            
+
+            // При открытии UI надо заблокировать движение мышью
             if (_isOpenedUI)
             {
-                _camera.transform.localEulerAngles = new Vector3(15, 0, 0);
+                if (float.IsNaN(_rotationInOpenUI))
+                {
+                    _rotationInOpenUI = _camera.transform.localEulerAngles.y;
+                }
+                _camera.transform.localEulerAngles = new Vector3(15, _rotationInOpenUI, 0);
             }
             else
             {
@@ -136,9 +143,11 @@ namespace player
 
                 // Поворачиваем камеру влево/вправо
                 _camera.transform.Rotate(Vector3.up * (_lookInput.x * _sensitivity * Time.fixedDeltaTime));
+
+                _rotationInOpenUI = Single.NaN;
             }
 
-            // Двигаем камеру вслед за игроком на высоте 2
+            // Двигаем камеру вслед за игроком на высоте 1
             _camera.transform.position = moveGlobal + new Vector3(0,1,0);
         }
     }
