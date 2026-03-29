@@ -1,11 +1,12 @@
 ﻿using System;
+using damage;
 using eventSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : Damage
     {
         private Vector2 _moveInput;
         private Vector2 _lookInput;
@@ -14,7 +15,8 @@ namespace player
         private bool _isGrounded;
         private bool _isOpenedUI;
         private GroundChecker _groundChecker;
-    
+        private float _rotationInOpenUI = Single.NaN;
+
         private PlayerInput _playerInput;
         private InputAction _moveAction;
         private InputAction _lookAction;
@@ -39,6 +41,8 @@ namespace player
             _moveAction = _playerInput.actions["Moved"];
             _lookAction = _playerInput.actions["Look"];
             _jumpAction = _playerInput.actions["Jump"];
+
+            GameEvents.PlayerPosition(transform);
         }
 
         private void OnEnable()
@@ -107,13 +111,22 @@ namespace player
         {
             _lookInput = Vector2.zero;
         }
-    
+
         private void HandleGroundStateChanged(bool grounded)
         {
             _isGrounded = grounded;
         }
 
-        private float _rotationInOpenUI = Single.NaN;
+        private void Update()
+        {
+            GameEvents.PlayerPosition(transform);
+            
+            if (_weight <= 0)
+            {
+                Debug.Log("----------------------------- Player Dead !!!!!!!!!!!!!!!!!!!");
+            }
+        }
+
         private void FixedUpdate()
         {
             // Направляем движение игрока в сторону поворота камеры

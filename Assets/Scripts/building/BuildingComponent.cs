@@ -1,8 +1,9 @@
+using damage;
 using UnityEngine;
 
 namespace building
 {
-    public class BuildingComponent : MonoBehaviour
+    public class BuildingComponent : Damage
     {
         [SerializeField] Material _buildingEnable;
         [SerializeField] Material _buildingDisable;
@@ -44,6 +45,14 @@ namespace building
             {
                 GetComponent<Renderer>().material = _buildingEnable;
                 _triggerEntered = false;
+            }
+        }
+        
+        private void Update()
+        {
+            if (_weight <= 0)
+            {
+                Destroy(gameObject);
             }
         }
     }
