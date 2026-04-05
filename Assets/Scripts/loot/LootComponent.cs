@@ -1,7 +1,10 @@
 ﻿using Items.scritableObjects.items;
 using UnityEngine;
 
-public class LootComponent : MonoBehaviour
+namespace loot
 {
-    public ItemObject item;
+    public class LootComponent : MonoBehaviour
+    {
+        public ItemObject item;
+    }
 }

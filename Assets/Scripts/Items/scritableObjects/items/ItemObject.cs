@@ -11,6 +11,7 @@ namespace Items.scritableObjects.items
         public GroupType groupType;
         public GameObject buildingPrefab;
         public CraftElements[] craftElements;
+        public float genarateCount = 0f;
         public Item data = new Item();
 
         public Item CreateItem()
@@ -36,6 +37,7 @@ namespace Items.scritableObjects.items
         public GroupType groupType;
         public GameObject buildingPrefab;
         public CraftElements[] craftElements;
+        public float genarateCount;
 
         public Item()
         {
@@ -51,6 +53,7 @@ namespace Items.scritableObjects.items
             groupType = item.groupType;
             buildingPrefab =  item.buildingPrefab;
             craftElements  = item.craftElements;
+            genarateCount = item.genarateCount;
         }
     }
 }

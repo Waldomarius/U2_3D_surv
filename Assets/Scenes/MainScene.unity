@@ -9557,6 +9557,7 @@ MonoBehaviour:
     - position: {x: 1, y: 10}
     - position: {x: -3.53, y: 100}
     - position: {x: 1.77, y: 100}
+    - position: {x: 2.96, y: 10}
 --- !u!4 &748011537
 Transform:
   m_ObjectHideFlags: 0
@@ -20738,9 +20739,10 @@ MonoBehaviour:
   _minX: -80
   _maxY: 80
   _minY: -80
-  _lootElements:
-  - item: {fileID: 11400000, guid: 7ade8fc01b5544243bb41cb78dc6f859, type: 2}
-    count: 500
+  _itemsDataBase: {fileID: 11400000, guid: da8f3c9b5093d4e448485a133986018c, type: 2}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!4 &1679197268
 Transform:
   m_ObjectHideFlags: 0
