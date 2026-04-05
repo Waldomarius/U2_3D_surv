@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 7ade8fc01b5544243bb41cb78dc6f859, type: 2}
+  returnToActiveDuration: 5
 --- !u!64 &6161167107350106146
 MeshCollider:
   m_ObjectHideFlags: 0

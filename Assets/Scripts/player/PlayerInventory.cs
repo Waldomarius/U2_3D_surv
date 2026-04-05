@@ -36,13 +36,13 @@ namespace player
             if (_container.AddItem(item, 1))
             {
                 lootObject.SetActive(false);
-                StartCoroutine(SetActiveLootObject(lootObject));
+                StartCoroutine(SetActiveLootObject(lootObject, loot.returnToActiveDuration));
             }
         }
         
-        private IEnumerator SetActiveLootObject(GameObject lootObject)
+        private IEnumerator SetActiveLootObject(GameObject lootObject,  float returnToActiveDuration)
         {
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(returnToActiveDuration);
             lootObject.SetActive(true);
         }
 

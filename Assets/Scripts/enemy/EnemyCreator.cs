@@ -2,7 +2,7 @@
 
 namespace enemy
 {
-    public class EnemyFactory : MonoBehaviour
+    public class EnemyCreator : MonoBehaviour
     {
         [SerializeField] private LayerMask _groundLayer;
         

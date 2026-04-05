@@ -1091,6 +1091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 7ade8fc01b5544243bb41cb78dc6f859, type: 2}
+  returnToActiveDuration: 10
 --- !u!54 &62460315
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1631,6 +1632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 7ade8fc01b5544243bb41cb78dc6f859, type: 2}
+  returnToActiveDuration: 10
 --- !u!54 &112911072
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1845,6 +1847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 7ade8fc01b5544243bb41cb78dc6f859, type: 2}
+  returnToActiveDuration: 10
 --- !u!1001 &146990998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2712,6 +2715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 3f093630ad1a4da419b2b5615bc8345b, type: 2}
+  returnToActiveDuration: 0
 --- !u!4 &238826972
 Transform:
   m_ObjectHideFlags: 0
@@ -9555,9 +9559,8 @@ MonoBehaviour:
     damage: 20
     spawnPoints:
     - position: {x: 1, y: 10}
-    - position: {x: -3.53, y: 100}
-    - position: {x: 1.77, y: 100}
-    - position: {x: 2.96, y: 10}
+    - position: {x: 5, y: 10}
+    - position: {x: 14, y: 15}
 --- !u!4 &748011537
 Transform:
   m_ObjectHideFlags: 0
@@ -11133,6 +11136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 7ade8fc01b5544243bb41cb78dc6f859, type: 2}
+  returnToActiveDuration: 10
 --- !u!54 &869592874
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12023,6 +12027,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 7ade8fc01b5544243bb41cb78dc6f859, type: 2}
+  returnToActiveDuration: 10
 --- !u!54 &941871260
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12962,6 +12967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 3f093630ad1a4da419b2b5615bc8345b, type: 2}
+  returnToActiveDuration: 0
 --- !u!1001 &984515238
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14829,6 +14835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 3f093630ad1a4da419b2b5615bc8345b, type: 2}
+  returnToActiveDuration: 0
 --- !u!1001 &1156250806
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15669,6 +15676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 42d05fdab7485d7478b5559e354c13ae, type: 2}
+  returnToActiveDuration: 3
 --- !u!54 &1201069910
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18606,6 +18614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 3f093630ad1a4da419b2b5615bc8345b, type: 2}
+  returnToActiveDuration: 0
 --- !u!1001 &1506426543
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22050,6 +22059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 3f093630ad1a4da419b2b5615bc8345b, type: 2}
+  returnToActiveDuration: 0
 --- !u!1001 &1798097910
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23912,6 +23922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 3f093630ad1a4da419b2b5615bc8345b, type: 2}
+  returnToActiveDuration: 0
 --- !u!1001 &1931180925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24168,6 +24179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 3f093630ad1a4da419b2b5615bc8345b, type: 2}
+  returnToActiveDuration: 0
 --- !u!1001 &1953261954
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25445,6 +25457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 42d05fdab7485d7478b5559e354c13ae, type: 2}
+  returnToActiveDuration: 3
 --- !u!54 &2031120047
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ MonoBehaviour:
   groupType: 0
   buildingPrefab: {fileID: 1969192603740655825, guid: 6649b2f5cd1488d49be654766dfe7855, type: 3}
   craftElements: []
+  genarateCount: 100
   data:
     id: 7
     itemName: 
@@ -24,3 +25,4 @@ MonoBehaviour:
     groupType: 0
     buildingPrefab: {fileID: 0}
     craftElements: []
+    genarateCount: 0

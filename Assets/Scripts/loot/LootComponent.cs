@@ -6,5 +6,6 @@ namespace loot
     public class LootComponent : MonoBehaviour
     {
         public ItemObject item;
+        public float returnToActiveDuration;
     }
 }

@@ -6,18 +6,18 @@ namespace enemy
     public class EnemyPool : MonoBehaviour
     {
         private List<GameObject> _pool = new List<GameObject>();
-        private List<EnemySpawner.EnemySpawnConfig> _enemyData;
+        private List<EnemySpawnConfig> _enemyData;
 
         public List<GameObject> GetPoolObjects() => _pool;
 
-        private EnemyFactory _factory;
+        private EnemyCreator _creator;
         
         private void Awake()
         {
-            _factory = GetComponent<EnemyFactory>();
+            _creator = GetComponent<EnemyCreator>();
         }
 
-        public void Initialize(List<EnemySpawner.EnemySpawnConfig> enemyData)
+        public void Initialize(List<EnemySpawnConfig> enemyData)
         {
             _enemyData = enemyData;
             InitializePool();
@@ -25,11 +25,11 @@ namespace enemy
         
         private void InitializePool()
         {
-            foreach (EnemySpawner.EnemySpawnConfig data in _enemyData)
+            foreach (EnemySpawnConfig data in _enemyData)
             {
-                foreach (EnemySpawner.SpawnPointData pointData in data.spawnPoints)
+                foreach (SpawnPointData pointData in data.spawnPoints)
                 {
-                    GameObject newObj = _factory.CreateNewObject(
+                    GameObject newObj = _creator.CreateNewObject(
                         data.enemyPrefab,
                         pointData.position,
                         data.moveSpeed,
