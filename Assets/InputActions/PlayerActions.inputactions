@@ -59,6 +59,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Axe",
+                    "type": "Button",
+                    "id": "dfec0c7b-9095-42a9-ab53-2cf18a9c037c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Health1",
+                    "type": "Button",
+                    "id": "613e1fdc-02d7-4643-bf29-cb22f1b29c42",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Health2",
+                    "type": "Button",
+                    "id": "57b0b8bc-d4b6-466f-bcad-461496c7430a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -169,6 +196,39 @@
                     "processors": "",
                     "groups": ";Keyboard",
                     "action": "Tab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3ac32ca4-470f-46e3-8002-c485f9c00f72",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Axe",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4521a937-869d-464f-bf03-3539233e43e6",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Health1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e302820b-7fb8-492f-9c27-7a7d7752af79",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Health2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
