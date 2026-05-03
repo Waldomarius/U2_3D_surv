@@ -683,8 +683,8 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: U2_3D_surv
-  metroPackageVersion: 
+  metroPackageName: U23Dsurv
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -692,7 +692,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: U2_3D_surv
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: U2_3D_surv
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using damage;
 using eventSystem;
+using scenes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -123,7 +125,7 @@ namespace player
             
             if (_weight <= 0)
             {
-                Debug.Log("----------------------------- Player Dead !!!!!!!!!!!!!!!!!!!");
+                Scenes.Dead();
             }
         }
 
