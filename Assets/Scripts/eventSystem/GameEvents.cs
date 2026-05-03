@@ -16,5 +16,16 @@ namespace eventSystem
         public static event Action<Transform> OnPlayerPosition;
         
         public static void PlayerPosition(Transform playerPosition) => OnPlayerPosition?.Invoke(playerPosition);
+        
+        public static event Action<float> OnUpdateActiveMenuSlot;
+        
+        public static void UpdateActiveMenuSlot(float activeMenuSlot) => OnUpdateActiveMenuSlot?.Invoke(activeMenuSlot);
+
+        public static event Action<bool> OnAxeActive;
+        
+        public static void UpdateAxeActive(bool axeActive)
+        {
+            OnAxeActive?.Invoke(axeActive);
+        }
     }
 }

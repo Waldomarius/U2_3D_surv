@@ -4,6 +4,7 @@ using containers;
 using eventSystem;
 using inventorySystem;
 using Items.scritableObjects.items;
+using loot;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -103,14 +104,32 @@ namespace craft.CraftMenu
         {
             if (IsApplyCraft())
             {
-                // Создадим крафт в мире
-                _buildingController.CreateBuilding(obj);
-                // Оповестим слушателей о закрытии UI
-                GameEvents.CloseUI(true);
-                GameEvents.OpenedUI(false);
+                LootComponent component = obj.GetComponent<LootComponent>();
+
+                // Надо добавить в мир или положить на склад
+                if (component != null)
+                {
+                    _inventoryContainer.AddItem(component.item.data, 1);
+
+                    if (component.item.activeMenuSlot > 0)
+                    {
+                        GameEvents.UpdateActiveMenuSlot(component.item.activeMenuSlot);
+                        GameEvents.UpdateAxeActive(true);
+                    }
+                }
+                else
+                {
+                    // Создадим крафт в мире
+                    _buildingController.CreateBuilding(obj);
+                    // Оповестим слушателей о закрытии UI
+                    GameEvents.CloseUI(true);
+                    GameEvents.OpenedUI(false);
+                }
+                
                 CreateButton();
                 RemoveItemFromStorage();
                 _inventoryContainer.UpdateInventory();
+
             }
         }
 

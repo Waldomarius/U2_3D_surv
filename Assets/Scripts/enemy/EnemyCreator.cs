@@ -23,7 +23,7 @@ namespace enemy
             GameObject newObj = Instantiate(prefab, pos, Quaternion.identity);
 
             EnemyController controller = newObj.GetComponent<EnemyController>();
-            controller.SetStartPosition(position);
+            controller.SetStartPosition(pos);
             controller.SetMoveSpeed(moveSpeed);
             controller.SetDamage(damage);
 

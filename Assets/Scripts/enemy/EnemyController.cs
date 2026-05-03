@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections;
-using building;
+﻿using System.Collections;
 using damage;
-using env;
 using eventSystem;
-using player;
 using UnityEngine;
 
 namespace enemy
@@ -19,16 +15,19 @@ namespace enemy
         private Transform _playerTransform;
         private Vector3 _movement;
         
-        private Vector2 _startPosition;
+        private Vector3 _startPosition;
         private bool _isAttacking = false;
         private bool _addDamage = true;
         private bool _dead = false;
         private float _damage;
+        private float _startWeight;
         
         private void Awake()
         {
             _animator = GetComponent<Animator>();
             _rb = GetComponent<Rigidbody>();
+            
+            _startWeight = _weight;
         }
         
         private void OnEnable()
@@ -51,7 +50,9 @@ namespace enemy
             if (!_dead)
             {
                 // Поворот врага в сторону персонажа
-                Vector3 rotation = new Vector3(_playerTransform.position.x, _playerTransform.position.y - 1,
+                Vector3 rotation = new Vector3(
+                    _playerTransform.position.x,
+                    _playerTransform.position.y - 1,
                     _playerTransform.position.z);
                 transform.LookAt(rotation);
 
@@ -80,11 +81,6 @@ namespace enemy
             {
                 AddDamage(other.gameObject);
             }
-
-            // if (other.CompareTag("Weapon"))
-            // {
-            //     Debug.Log("-------------------------------------------- Weapon");
-            // }
         }
 
         private void AddDamage(GameObject tree)
@@ -101,6 +97,11 @@ namespace enemy
                     component.UpdateWeight(_damage);
                     StartCoroutine(AddDamage());
                 }
+                else
+                {
+                    _isAttacking = false;
+                    _addDamage = true;
+                }
             }
         }
         
@@ -111,7 +112,7 @@ namespace enemy
             _addDamage = true;
         }
 
-        public void SetStartPosition(Vector2 position)
+        public void SetStartPosition(Vector3 position)
         {
             _startPosition = position;
         }
@@ -134,8 +135,28 @@ namespace enemy
             {
                 _dead = true;
                 _animator.SetBool("Dead", true);
-                Destroy(gameObject, 5);
+                
+                StartCoroutine(RespawnEnemy());
+                
+                // Destroy(gameObject, 5);
             }
+        }
+
+
+        private IEnumerator RespawnEnemy()
+        {
+            yield return new WaitForSeconds(8f);
+
+            gameObject.transform.position = _startPosition;
+            _weight = _startWeight;
+            
+            
+            _dead  = false;
+            gameObject.SetActive(true);
+            _isAttacking = false;
+            _addDamage = true;
+            _animator.SetBool("Reset", true);
+
         }
 
         public bool CheckAddDamage(float value)

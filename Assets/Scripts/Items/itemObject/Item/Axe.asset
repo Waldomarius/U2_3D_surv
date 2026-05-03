@@ -15,12 +15,13 @@ MonoBehaviour:
   itemName: Axe
   uiDisplay: {fileID: 1257244187, guid: cfe4d075a93c4cf42be802ec4d62b09d, type: 3}
   groupType: 2
-  buildingPrefab: {fileID: 3918036935182654285, guid: b5991b8efe7e0044888b9058f6d3119f, type: 3}
+  buildingPrefab: {fileID: 2237636579347551250, guid: 462459cd94329634bb7142462f7d0fcd, type: 3}
   craftElements:
   - item: {fileID: 11400000, guid: 7ade8fc01b5544243bb41cb78dc6f859, type: 2}
     count: 5
   - item: {fileID: 11400000, guid: 42d05fdab7485d7478b5559e354c13ae, type: 2}
     count: 2
+  genarateCount: 0
   data:
     id: 1
     itemName: 
@@ -28,3 +29,6 @@ MonoBehaviour:
     groupType: 0
     buildingPrefab: {fileID: 0}
     craftElements: []
+    genarateCount: 0
+    activeMenuSlot: 0
+  activeMenuSlot: 1

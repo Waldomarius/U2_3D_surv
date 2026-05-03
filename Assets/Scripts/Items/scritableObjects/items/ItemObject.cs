@@ -13,6 +13,7 @@ namespace Items.scritableObjects.items
         public CraftElements[] craftElements;
         public float genarateCount = 0f;
         public Item data = new Item();
+        public float activeMenuSlot;
 
         public Item CreateItem()
         {
@@ -38,7 +39,8 @@ namespace Items.scritableObjects.items
         public GameObject buildingPrefab;
         public CraftElements[] craftElements;
         public float genarateCount;
-
+        public float activeMenuSlot;
+        
         public Item()
         {
             itemName = "";
@@ -54,6 +56,7 @@ namespace Items.scritableObjects.items
             buildingPrefab =  item.buildingPrefab;
             craftElements  = item.craftElements;
             genarateCount = item.genarateCount;
+            activeMenuSlot = item.activeMenuSlot;
         }
     }
 }

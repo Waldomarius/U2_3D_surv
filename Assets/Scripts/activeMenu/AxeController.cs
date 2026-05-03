@@ -21,10 +21,9 @@ namespace activeMenu
         private InputAction _mouseButtonLeftAction;
         
         private bool _isActive = false;
+        private bool _isCrafted = false;
         private bool _isOpenedUI = false;
         private Quaternion _startOrientation;
-
-        private bool _isAttacking = false;
         private bool _addDamage = true;
 
         void Awake()
@@ -45,6 +44,7 @@ namespace activeMenu
             _mouseButtonLeftAction.performed += OnButtonLeftdPerformed;
             
             GameEvents.OnOpenedUI += OpenedUI;
+            GameEvents.OnAxeActive += UpdateAxeActive;
         }
 
         private void OnDisable()
@@ -55,8 +55,14 @@ namespace activeMenu
             _mouseButtonLeftAction.performed -= OnButtonLeftdPerformed;
             
             GameEvents.OnOpenedUI -= OpenedUI;
+            GameEvents.OnAxeActive += UpdateAxeActive;
         }
-        
+
+        private void UpdateAxeActive(bool isCrafted)
+        {
+            _isCrafted = isCrafted;
+        }
+
         private void OpenedUI(bool isOpenedUI)
         {
             _isOpenedUI = isOpenedUI;
@@ -72,15 +78,19 @@ namespace activeMenu
 
         private void OnAxePerformed(InputAction.CallbackContext obj)
         {
-            if (_isActive)
+            if (_isCrafted)
             {
-                transform.rotation = Quaternion.Euler(-_maxRoration, 0, 0);
-                _isActive =  false;
-            }
-            else
-            {
-                transform.rotation = Quaternion.Euler(_camera.transform.eulerAngles.x, _camera.transform.eulerAngles.y, 0);
-                _isActive = true;
+                if (_isActive)
+                {
+                    transform.rotation = Quaternion.Euler(-_maxRoration, 0, 0);
+                    _isActive = false;
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Euler(_camera.transform.eulerAngles.x,
+                        _camera.transform.eulerAngles.y, 0);
+                    _isActive = true;
+                }
             }
         }
 
@@ -111,17 +121,19 @@ namespace activeMenu
         
         private void AddDamageEnemy(GameObject tree)
         {
-            _isAttacking = true;
-
             if (_addDamage)
             {
                 _addDamage =  false;
                 EnemyController component = tree.GetComponent<EnemyController>();
-                    
+                
                 if (component.CheckAddDamage(_damage))
                 {
                     component.UpdateWeight(_damage);
                     StartCoroutine(AddDamageEnemy());
+                }
+                else
+                {
+                    _addDamage = true;
                 }
             }
         }
@@ -129,7 +141,6 @@ namespace activeMenu
         private IEnumerator AddDamageEnemy()
         {
             yield return new WaitForSeconds(1f);
-            _isAttacking = false;
             _addDamage = true;
         }
     }

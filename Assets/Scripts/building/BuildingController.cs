@@ -72,14 +72,6 @@ namespace building
     
         private void Update()
         {
-            if (Input.GetKeyDown("e"))
-            {
-                if (!_obj)
-                {
-                    // CreateBuilding(_buildingPrefab);
-                }
-            }
-
             if (_obj)
             {
                 Vector3 point = new Vector3(_width, _height, 0);
