@@ -23,9 +23,10 @@ namespace eventSystem
 
         public static event Action<bool> OnAxeActive;
         
-        public static void UpdateAxeActive(bool axeActive)
-        {
-            OnAxeActive?.Invoke(axeActive);
-        }
+        public static void UpdateAxeActive(bool axeActive) => OnAxeActive?.Invoke(axeActive);
+
+        public static event Action<float> OnHealthInfo;
+        
+        public static void UpdateHealthInfo(float health) => OnHealthInfo?.Invoke(health);
     }
 }

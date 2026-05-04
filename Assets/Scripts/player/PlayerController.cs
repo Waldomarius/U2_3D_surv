@@ -46,6 +46,10 @@ namespace player
 
             GameEvents.PlayerPosition(transform);
         }
+        private void Start()
+        {
+            GameEvents.UpdateHealthInfo(_weight);
+        }
 
         private void OnEnable()
         {
@@ -164,6 +168,12 @@ namespace player
 
             // Двигаем камеру вслед за игроком на высоте 1
             _camera.transform.position = moveGlobal + new Vector3(0,1,0);
+        }
+        
+        public override void UpdateWeight(float value)
+        {
+            _weight -= value;
+            GameEvents.UpdateHealthInfo(_weight);
         }
     }
 }

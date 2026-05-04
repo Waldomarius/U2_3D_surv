@@ -71,15 +71,18 @@ namespace enemy
                 _rb.MovePosition(transform.position + _movement * (_speed * Time.deltaTime));
                 _animator.SetFloat("MoveSpeed", 1);
             }
-
         }
+        
         private void OnTriggerStay(Collider other)
         {
-            if (other.CompareTag("Tree")
-                || other.CompareTag("Player")
-                ||other.CompareTag("Building"))
+            if (!_dead)
             {
-                AddDamage(other.gameObject);
+                if (other.CompareTag("Tree")
+                    || other.CompareTag("Player")
+                    || other.CompareTag("Building"))
+                {
+                    AddDamage(other.gameObject);
+                }
             }
         }
 

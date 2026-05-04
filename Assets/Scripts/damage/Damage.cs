@@ -6,7 +6,7 @@ namespace damage
     {
         [SerializeField] protected float _weight = 100f;
         
-        public void UpdateWeight(float value)
+        public virtual void UpdateWeight(float value)
         {
             _weight -= value;
         }
