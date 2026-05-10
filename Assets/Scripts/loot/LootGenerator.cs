@@ -44,7 +44,7 @@ namespace loot
                     
                     if (Physics.Raycast(downRay, out hit, _groundLayer))
                     {
-                        position = new Vector3(randomX, tempZPos - hit.distance , randomY);
+                        position = new Vector3(randomX, tempZPos - hit.distance + 0.3f, randomY);
                     }
                     
                     GameObject lootOnLocation = Instantiate(item.buildingPrefab, position, Quaternion.identity);

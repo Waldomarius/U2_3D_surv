@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Chicken
   uiDisplay: {fileID: 848788459, guid: cfe4d075a93c4cf42be802ec4d62b09d, type: 3}
-  groupType: 3
+  groupType: 0
   buildingPrefab: {fileID: 4751309179195205155, guid: 405182fb1a70a9d4a8a4c06cae1e6b5f, type: 3}
   craftElements:
   - item: {fileID: 11400000, guid: 0924154e6cb911d49b077543a8429c04, type: 2}
     count: 4
   - item: {fileID: 11400000, guid: 7ade8fc01b5544243bb41cb78dc6f859, type: 2}
     count: 1
+  genarateCount: 0
   data:
     id: 3
     itemName: 
@@ -28,3 +29,6 @@ MonoBehaviour:
     groupType: 0
     buildingPrefab: {fileID: 0}
     craftElements: []
+    genarateCount: 0
+    activeMenuSlot: 0
+  activeMenuSlot: 0

@@ -15,12 +15,11 @@ MonoBehaviour:
   itemName: Board
   uiDisplay: {fileID: 281754690, guid: cfe4d075a93c4cf42be802ec4d62b09d, type: 3}
   groupType: 3
-  buildingPrefab: {fileID: 6800690333703492085, guid: 41d2cf6fa61ab7d49a842763be600249, type: 3}
+  buildingPrefab: {fileID: 6917073365472557711, guid: e59cb3c0308f45c4cac1274abf832b77, type: 3}
   craftElements:
-  - item: {fileID: 11400000, guid: d60c1096fe0b91f488544662b49870d3, type: 2}
-    count: 3
-  - item: {fileID: 11400000, guid: a26eebfe97121d9419d59451d811c95d, type: 2}
-    count: 6
+  - item: {fileID: 11400000, guid: 032baa26ddb188d45ba099af27a64aa1, type: 2}
+    count: 1
+  genarateCount: 0
   data:
     id: 2
     itemName: 
@@ -28,3 +27,6 @@ MonoBehaviour:
     groupType: 0
     buildingPrefab: {fileID: 0}
     craftElements: []
+    genarateCount: 0
+    activeMenuSlot: 0
+  activeMenuSlot: 0

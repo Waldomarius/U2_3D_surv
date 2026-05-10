@@ -20,6 +20,10 @@ namespace eventSystem
         public static event Action<float> OnUpdateActiveMenuSlot;
         
         public static void UpdateActiveMenuSlot(float activeMenuSlot) => OnUpdateActiveMenuSlot?.Invoke(activeMenuSlot);
+        
+        public static event Action<float> OnDisableActiveMenuSlot;
+        
+        public static void UpdateDissableActiveMenuSlot(float activeMenuSlot) => OnDisableActiveMenuSlot?.Invoke(activeMenuSlot);
 
         public static event Action<bool> OnAxeActive;
         

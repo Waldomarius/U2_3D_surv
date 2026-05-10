@@ -18,6 +18,7 @@ namespace player
         private bool _isOpenedUI;
         private GroundChecker _groundChecker;
         private float _rotationInOpenUI = Single.NaN;
+        private float _startWeight;
 
         private PlayerInput _playerInput;
         private InputAction _moveAction;
@@ -44,6 +45,7 @@ namespace player
             _lookAction = _playerInput.actions["Look"];
             _jumpAction = _playerInput.actions["Jump"];
 
+            _startWeight = _weight;
             GameEvents.PlayerPosition(transform);
         }
         private void Start()
@@ -175,5 +177,23 @@ namespace player
             _weight -= value;
             GameEvents.UpdateHealthInfo(_weight);
         }
+        
+        public void UpdateHealthWeight(float value)
+        {
+            _weight += value;
+
+            if (_weight > _startWeight)
+            {
+                _weight = _startWeight;
+            }
+            
+            GameEvents.UpdateHealthInfo(_weight);
+        }
+
+        public bool CanUpdateWeight()
+        {
+            return _weight < _startWeight;
+        }
+        
     }
 }

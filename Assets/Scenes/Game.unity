@@ -8944,6 +8944,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 682894568}
+  - component: {fileID: 682894569}
   m_Layer: 0
   m_Name: ActiveMenu
   m_TagString: Untagged
@@ -8967,6 +8968,23 @@ Transform:
   - {fileID: 1832071416}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &682894569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682894567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a7645d03b414a32916a420d4a1cfa32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inputController: {fileID: 129148393}
+  _playerControllerGO: {fileID: 1145946305}
+  _inventoryContainerGO: {fileID: 2093276722}
+  _appleItem: {fileID: 11400000, guid: d60c1096fe0b91f488544662b49870d3, type: 2}
+  _weight: 5
 --- !u!1 &693847202
 GameObject:
   m_ObjectHideFlags: 0

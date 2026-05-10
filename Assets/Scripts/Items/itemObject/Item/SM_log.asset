@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc7922fa046e4c1092d27f6158daf914, type: 3}
-  m_Name: Apple
+  m_Name: SM_log
   m_EditorClassIdentifier: 
-  itemName: Apple
-  uiDisplay: {fileID: 281443106, guid: cfe4d075a93c4cf42be802ec4d62b09d, type: 3}
+  itemName: Logs
+  uiDisplay: {fileID: -605114090, guid: cfe4d075a93c4cf42be802ec4d62b09d, type: 3}
   groupType: 0
-  buildingPrefab: {fileID: 1755865475335770947, guid: 6db7680dca4eb2748a7339cb3bc13d14, type: 3}
+  buildingPrefab: {fileID: 2278323134252516134, guid: 63a58d29feb4cf64081e1f4a8e1b6844, type: 3}
   craftElements: []
-  genarateCount: 500
+  genarateCount: 100
   data:
-    id: 0
+    id: 8
     itemName: 
     uiDisplay: {fileID: 0}
     groupType: 0
@@ -27,4 +27,4 @@ MonoBehaviour:
     craftElements: []
     genarateCount: 0
     activeMenuSlot: 0
-  activeMenuSlot: 2
+  activeMenuSlot: 0

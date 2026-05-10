@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using eventSystem;
 using inventorySystem;
 using Items.scritableObjects.items;
 using loot;
@@ -35,6 +36,11 @@ namespace player
             // добавляем в инвентарь и убираем с улицы
             if (_container.AddItem(item, 1))
             {
+                if (item.activeMenuSlot > 0)
+                {
+                    GameEvents.UpdateActiveMenuSlot(item.activeMenuSlot);
+                }
+
                 lootObject.SetActive(false);
                 StartCoroutine(SetActiveLootObject(lootObject, loot.returnToActiveDuration));
             }

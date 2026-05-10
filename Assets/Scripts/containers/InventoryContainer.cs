@@ -46,7 +46,7 @@ namespace inventorySystem
             
             if (!dataBase.items[item.id] || slot == null)
             {
-                SetEmptySlot(item,  amount);
+                SetEmptySlot(item, amount);
                 UpdateInventory();
                 return true;
             }
@@ -70,7 +70,7 @@ namespace inventorySystem
             return null;
         }
         
-        private InventorySlot FindItemOnInventorySlot(Item item)
+        public InventorySlot FindItemOnInventorySlot(Item item)
         {
             for (int i = 0; i < _container.items.Count; i++)
             {
@@ -101,6 +101,27 @@ namespace inventorySystem
                 {
                     // Убрали айтем из контейнера
                     _container.items[i].UpdateSlot(null, 0);
+                }
+            }
+        }
+        
+        /**
+         * Списать нужное количество ресурсов со склада.
+         */
+        public void RemoveItemCountFromStorage(Item itemFull, int count)
+        {
+            for (int i = 0; i < _container.items.Count; i++)
+            {
+                InventorySlot slot = _container.items[i];
+                
+                if (slot.item.itemName == itemFull.itemName)
+                {
+                    int newStorageAmount = slot.amount - count;
+                    slot.amount = newStorageAmount;
+                    if (slot.amount == 0)
+                    {
+                        slot.RemoveItem();
+                    }
                 }
             }
         }

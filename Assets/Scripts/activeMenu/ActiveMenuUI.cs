@@ -23,11 +23,20 @@ namespace activeMenu
         private void OnEnable()
         {
             GameEvents.OnUpdateActiveMenuSlot += UpdateActiveMenuSlot;
+            GameEvents.OnDisableActiveMenuSlot += DisableActiveMenuSlot;
         }
         
         private void OnDisable()
         {
             GameEvents.OnUpdateActiveMenuSlot -= UpdateActiveMenuSlot;
+            GameEvents.OnDisableActiveMenuSlot -= DisableActiveMenuSlot;
+        }
+
+        private void DisableActiveMenuSlot(float activeMenuSlot)
+        {
+            GameObject obj = _slotOnInteface[activeMenuSlot];
+            Image img1 = obj.transform.GetComponent<Image>();
+            img1.color = Color.red;
         }
 
         private void UpdateActiveMenuSlot(float activeMenuSlot)

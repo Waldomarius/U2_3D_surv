@@ -14,17 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Lumber
   uiDisplay: {fileID: -165166757, guid: cfe4d075a93c4cf42be802ec4d62b09d, type: 3}
-  groupType: 1
-  buildingPrefab: {fileID: 3308914722744996560, guid: 29abf24f5c3a0c346920490127e9b6d1, type: 3}
+  groupType: 3
+  buildingPrefab: {fileID: 5850444938648351990, guid: 1e63d2a1731e95a4bbee54952e67f2b5, type: 3}
   craftElements:
-  - item: {fileID: 11400000, guid: a26eebfe97121d9419d59451d811c95d, type: 2}
+  - item: {fileID: 11400000, guid: ed5dfcb37dde7374fba7aef6b5e383f6, type: 2}
     count: 2
-  - item: {fileID: 11400000, guid: d60c1096fe0b91f488544662b49870d3, type: 2}
-    count: 4
+  genarateCount: 0
   data:
-    id: 5
+    id: 9
     itemName: 
     uiDisplay: {fileID: 0}
     groupType: 0
     buildingPrefab: {fileID: 0}
     craftElements: []
+    genarateCount: 0
+    activeMenuSlot: 0
+  activeMenuSlot: 0

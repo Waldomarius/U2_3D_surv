@@ -109,7 +109,10 @@ namespace craft.CraftMenu
                 // Надо добавить в мир или положить на склад
                 if (component != null)
                 {
-                    _inventoryContainer.AddItem(component.item.data, 1);
+                    component.item.CreateItem();
+                    
+                    Item item = new Item(component.item);
+                    _inventoryContainer.AddItem(item, 1);
 
                     if (component.item.activeMenuSlot > 0)
                     {
