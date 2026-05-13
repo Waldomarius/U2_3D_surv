@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc7922fa046e4c1092d27f6158daf914, type: 3}
+  m_Name: Campfire
+  m_EditorClassIdentifier: 
+  itemName: Campfire
+  uiDisplay: {fileID: 1093064478, guid: cfe4d075a93c4cf42be802ec4d62b09d, type: 3}
+  groupType: 2
+  buildingPrefab: {fileID: 8475171451159580080, guid: 6046a64e832cdad44ac9e18fe66d19f1, type: 3}
+  craftElements:
+  - item: {fileID: 11400000, guid: 7ade8fc01b5544243bb41cb78dc6f859, type: 2}
+    count: 1
+  - item: {fileID: 11400000, guid: 032baa26ddb188d45ba099af27a64aa1, type: 2}
+    count: 1
+  genarateCount: 0
+  data:
+    id: 12
+    itemName: 
+    uiDisplay: {fileID: 0}
+    groupType: 0
+    buildingPrefab: {fileID: 0}
+    craftElements: []
+    genarateCount: 0
+    activeMenuSlot: 0
+  activeMenuSlot: 0

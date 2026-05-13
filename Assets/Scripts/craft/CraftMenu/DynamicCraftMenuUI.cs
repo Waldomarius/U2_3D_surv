@@ -132,7 +132,6 @@ namespace craft.CraftMenu
                 CreateButton();
                 RemoveItemFromStorage();
                 _inventoryContainer.UpdateInventory();
-
             }
         }
 
